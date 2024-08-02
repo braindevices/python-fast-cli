@@ -35,12 +35,12 @@ jobs:
     - name: Lint with Ruff
       run: |
         ./devenv_exec pip install ruff
-        ./devenv_exec ruff check --output-format=github .
+        ./devenv_exec ruff check --output-format=github fast_speedtest tests
     - name: Test with pytest
       run: |
         ./devenv_exec pytest
     - name: Build a binary wheel and a source tarball
-      run: python3 -m build
+      run: ./build.sh
     - name: Store the distribution packages
       uses: actions/upload-artifact@v3
       with:
