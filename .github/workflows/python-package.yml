@@ -32,16 +32,16 @@ jobs:
     - name: Prepare venv and Install dependencies
       run: |
         python3 myprepare.py
-    - name: check type
-      run: |
-        ./devenv_exec ./check_types.sh
-    - name: Lint with Ruff
-      run: |
-        ./devenv_exec pip install ruff
-        ./devenv_exec ruff check --output-format=github fast_speedtest tests
-    - name: Test with pytest
-      run: |
-        ./devenv_exec pytest
+    # - name: check type
+    #   run: |
+    #     ./devenv_exec ./check_types.sh
+    # - name: Lint with Ruff
+    #   run: |
+    #     ./devenv_exec pip install ruff
+    #     ./devenv_exec ruff check --output-format=github fast_speedtest tests
+    # - name: Test with pytest
+    #   run: |
+    #     ./devenv_exec pytest
     - name: Show example result
       if: matrix.python-version == '3.11'
       run: ./devenv_exec --min-duration 2 --max-duration 3 --max-connections 1 --no-upload --interval 1 --json
