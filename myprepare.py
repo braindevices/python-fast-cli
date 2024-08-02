@@ -142,7 +142,7 @@ def render_template(template: str, output: Optional[str], **kwargs)->str:
 
 
 def install_mypy(user: bool):
-    for packet in ["pip", "mypy", "pyright", "pytest"]:
+    for packet in ["pip", "mypy", "pyright", "pytest", "build"]:
         cmd = [
             "./devenv_exec",
             "pip",
