@@ -1,20 +1,21 @@
 import json
-from fast_speedtest.cli import (
-    parse_arguments,
-    fast_config_t,
-    snake_to_camel,
-    camel_to_snake,
-    main
-)
+import sys
+
+from io import StringIO
 
 import pytest
-import sys
-from io import StringIO
+
+from fast_speedtest.cli import camel_to_snake
+from fast_speedtest.cli import fast_config_t
+from fast_speedtest.cli import main
+from fast_speedtest.cli import parse_arguments
+from fast_speedtest.cli import snake_to_camel
 
 
 def test_snake_to_camel():
     assert snake_to_camel("hello_world") == "helloWorld"
     assert snake_to_camel("hello-world", sep="-") == "helloWorld"
+
 
 def test_camel_to_snake():
     assert camel_to_snake("helloWorld") == "hello_world"
@@ -25,7 +26,7 @@ def test_parser_help(monkeypatch: pytest.MonkeyPatch):
     # Simulate command-line arguments
     monkeypatch.setattr(sys, 'argv', ['cli', '-h'])
     
-    #Capture output
+    # Capture output
     captured_output = StringIO()
     monkeypatch.setattr(sys, 'stdout', captured_output)
     with pytest.raises(SystemExit) as excinfo:
@@ -39,7 +40,7 @@ def test_parser_no_args(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(sys, 'argv', ['cli'])
     
     # Call the main function which will trigger SystemExit
-    config, auto_install_browsers, output_json,  = parse_arguments()
+    config, auto_install_browsers, output_json, = parse_arguments()
     assert config.fast_config == fast_config_t()
     assert auto_install_browsers
     assert not output_json
@@ -50,7 +51,7 @@ def test_parser_with_args(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(sys, 'argv', ['cli', '--max-duration', '5'])
     
     # Call the main function which will trigger SystemExit
-    config, auto_install_browsers, output_json,  = parse_arguments()
+    config, auto_install_browsers, output_json, = parse_arguments()
     assert auto_install_browsers
     assert not output_json
     assert config.fast_config == fast_config_t(maxDuration=5)
@@ -69,7 +70,7 @@ def test_main(monkeypatch: pytest.MonkeyPatch):
     ]
     monkeypatch.setattr(sys, 'argv', args)
     
-    #Capture output
+    # Capture output
     captured_output = StringIO()
     monkeypatch.setattr(sys, 'stdout', captured_output)
     main()
