@@ -90,5 +90,6 @@ async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
             if result["isDone"]:
                 break
             await asyncio.sleep(config.check_interval)
-        browser.close()    
+        await context.close()
+        await browser.close()    
     return results
