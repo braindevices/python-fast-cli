@@ -25,7 +25,7 @@ local_scheme="node-and-timestamp"
 fix = true
 lint.select = ["E", "F", "B", "U", "YTT", "C", "DTZ", "PYI", "PT", "I", "FURB", "RUF"]
 lint.preview = true
-paths = ["fast_speedtest", "tests"]
+exclude = ["**/*", "!fast_speedtest/**", "!tests/**"]
 
 [tool.ruff.lint.isort]
 force-single-line = true
