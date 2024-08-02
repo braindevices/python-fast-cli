@@ -7,6 +7,6 @@ if we see vx.x.x.post1.dev1 that means we are missing some tags
 '''
 print(how_to_version)
 print(setuptools_scm.get_version(
-        version_scheme="no-guess-dev",
+        version_scheme="guess-next-dev",
         local_scheme="node-and-timestamp"
 ))

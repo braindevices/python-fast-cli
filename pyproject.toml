@@ -22,7 +22,7 @@ fast-cli = "fast_speedtest.cli:main"
 
 [tool.setuptools_scm]
 write_to = "fast_speedtest/_version.py"
-version_scheme="no-guess-dev"
+version_scheme="guess-next-dev"
 local_scheme="node-and-timestamp"
 
 [tool.ruff]
