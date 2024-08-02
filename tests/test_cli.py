@@ -31,8 +31,6 @@ def test_parser_help(monkeypatch: pytest.MonkeyPatch):
     with pytest.raises(SystemExit) as excinfo:
         # Call the main function which will trigger SystemExit
         parse_arguments()
-    captured_output.seek(0)
-    output = captured_output.getvalue()
     assert excinfo.value.code == 0
 
 
