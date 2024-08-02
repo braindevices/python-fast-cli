@@ -45,3 +45,123 @@ options:
 ```
 
 By default, when this command is run for the first time, it will attempt to install the browser using the Playwright command. If you are certain that the browser is already installed via Playwright, you can suppress this behavior by using the --no-install-browser flag.
+
+If you get warning about `Host system is missing dependencies to run browsers.`,
+normally it won't cause any real problem,
+since the fast.com only use limited features.
+But if it really cause problem make sure you have installed [all the system dependencies](https://playwright.dev/docs/browsers#install-system-dependencies).
+
+### example
+
+`python3 -m fast_speedtest.cli --min-duration 2 --max-duration 3 --max-connections 1 --no-upload --interval 1 --json`
+
+```json
+[
+ {
+  "downloadSpeed": 0,
+  "uploadSpeed": 0,
+  "downloadUnit": "",
+  "downloaded": 0,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 0,
+  "bufferBloat": 0,
+  "userLocation": "",
+  "userIp": "",
+  "serverLocation": [
+   ""
+  ],
+  "isDone": false
+ },
+ {
+  "downloadSpeed": 1.5,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 0.12,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 0,
+  "bufferBloat": 89,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.91.174",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false
+ },
+ {
+  "downloadSpeed": 170,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 20,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 0,
+  "bufferBloat": 89,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.91.174",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false
+ },
+ {
+  "downloadSpeed": 280,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 50,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 0,
+  "bufferBloat": 89,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.91.174",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false
+ },
+ {
+  "downloadSpeed": 280,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 60,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 85,
+  "bufferBloat": 89,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.91.174",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false
+ },
+ {
+  "downloadSpeed": 280,
+  "uploadSpeed": 38,
+  "downloadUnit": "Mbps",
+  "downloaded": 60,
+  "uploadUnit": "Kbps",
+  "uploaded": 0,
+  "latency": 85,
+  "bufferBloat": 89,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.91.174",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false
+ }
+]
+```
