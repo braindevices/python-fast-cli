@@ -24,6 +24,7 @@ local_scheme="node-and-timestamp"
 [tool.ruff]
 fix = true
 lint.select = ["E", "F", "B", "U", "YTT", "C", "DTZ", "PYI", "PT", "I", "FURB", "RUF"]
+lint.ignore = ["E501"]
 lint.preview = true
 # exclude = ["**/*", "!fast_speedtest/**", "!tests/**"]
 
