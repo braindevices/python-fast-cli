@@ -43,8 +43,9 @@ class speedtest_config_t(NamedTuple):
     print: bool = True
 
 
+DEFAULT_SPEEDTEST_CONF = speedtest_config_t()
 
-async def run_speedtest(config: speedtest_config_t = speedtest_config_t()):
+async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
     results = []
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
