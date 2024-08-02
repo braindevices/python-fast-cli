@@ -7,8 +7,6 @@ from .api import fast_config_t
 from .api import run_speedtest
 from .api import speedtest_config_t
 
-DEFAULT_BROWSER = ["chromium"]
-
 
 def camel_to_snake(s, sep="_"):
     return ''.join([sep + c.lower() if c.isupper() else c for c in s]).lstrip(sep)
@@ -39,7 +37,14 @@ def parse_arguments():
         dest="auto_install_browsers",
         action="store_false",
         default=True,
-        help=f"automatically install {DEFAULT_BROWSER}"
+        help="suppress automatically installation of browsers"
+    )
+    
+    parser.add_argument(
+        "--use-browser",
+        dest="browser_name",
+        type=str,
+        default="chromium"
     )
 
     parser.add_argument(
@@ -75,7 +80,8 @@ def parse_arguments():
         fast_config=fast,
         upload=parsed.upload,
         check_interval=parsed.check_interval,
-        print=True
+        print=True,
+        browser_name=parsed.browser_name
     )
     return config, parsed.auto_install_browsers, parsed.output_json
 
@@ -84,7 +90,7 @@ def main():
     config, auto_install_browsers, output_json = parse_arguments()
     if auto_install_browsers:
         from .utils import auto_install_browsers
-        auto_install_browsers()
+        auto_install_browsers([config.browser_name])
     
     res = asyncio.run(run_speedtest(
         config

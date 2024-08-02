@@ -46,6 +46,7 @@ class speedtest_config_t(NamedTuple):
     upload: bool = False
     check_interval: float = 1.0
     print: bool = True
+    browser_name: str = "chromium"
 
 
 DEFAULT_SPEEDTEST_CONF = speedtest_config_t()
@@ -54,7 +55,7 @@ DEFAULT_SPEEDTEST_CONF = speedtest_config_t()
 async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
     results = []
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await getattr(p, config.browser_name).launch(headless=True)
         context = await browser.new_context(storage_state=gen_local_storage(config.fast_config))
         page = await context.new_page()
         await page.goto("https://fast.com")
@@ -89,4 +90,5 @@ async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
             if result["isDone"]:
                 break
             await asyncio.sleep(config.check_interval)
-        return results
+        browser.close()    
+    return results
