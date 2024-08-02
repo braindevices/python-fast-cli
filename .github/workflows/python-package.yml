@@ -44,7 +44,7 @@ jobs:
     #     ./devenv_exec pytest
     - name: Show example result
       if: matrix.python-version == '3.11'
-      run: ./devenv_exec --min-duration 2 --max-duration 3 --max-connections 1 --no-upload --interval 1 --json
+      run: ./devenv_exec python3 -m fast_speedtest.cli --min-duration 2 --max-duration 3 --max-connections 1 --no-upload --interval 1 --json
     - name: Build a binary wheel and a source tarball
       run: ./build.sh
     - name: Store the distribution packages
