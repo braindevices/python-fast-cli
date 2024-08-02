@@ -1,18 +1,23 @@
 import asyncio
-import sys
-from playwright.async_api import async_playwright, StorageState
-from typing import NamedTuple
 import json
+import sys
+
+from typing import NamedTuple
+
+from playwright.async_api import StorageState
+from playwright.async_api import async_playwright
+
 
 class fast_config_t(NamedTuple):
     minDuration: int = 5
     maxDuration: int = 30
     measureUploadLatency: bool = False
-    minConnections: int =  1
-    maxConnections: int =  8
+    minConnections: int = 1
+    maxConnections: int = 8
     shouldPersist: bool = True
     showAdvanced: bool = True
     # __test__: int = 1
+
 
 def gen_local_storage(
     config: fast_config_t
@@ -38,12 +43,13 @@ def gen_local_storage(
 
 class speedtest_config_t(NamedTuple):
     fast_config: fast_config_t = fast_config_t()
-    upload:bool = False
-    check_interval: float=1.0
+    upload: bool = False
+    check_interval: float = 1.0
     print: bool = True
 
 
 DEFAULT_SPEEDTEST_CONF = speedtest_config_t()
+
 
 async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
     results = []

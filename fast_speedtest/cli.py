@@ -1,11 +1,17 @@
-from argparse import ArgumentParser
 import asyncio
 import json
-from .api import fast_config_t, run_speedtest, speedtest_config_t
+
+from argparse import ArgumentParser
+
+from .api import fast_config_t
+from .api import run_speedtest
+from .api import speedtest_config_t
+
 DEFAULT_BROWSER = ["chromium"]
 
+
 def camel_to_snake(s, sep="_"):
-    return ''.join([sep+c.lower() if c.isupper() else c for c in s]).lstrip(sep)
+    return ''.join([sep + c.lower() if c.isupper() else c for c in s]).lstrip(sep)
 
 
 def snake_to_camel(s, sep="_"):
@@ -41,7 +47,7 @@ def parse_arguments():
         dest="upload",
         action="store_false",
         default=True,
-        help=f"do not wait for upload test"
+        help="do not wait for upload test"
     )
 
     parser.add_argument(
