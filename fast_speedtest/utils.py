@@ -1,3 +1,4 @@
+from typing import List, Optional
 from playwright.sync_api import sync_playwright
 import playwright._impl._errors
 import sys
@@ -15,6 +16,9 @@ def need_to_install_browsers():
             raise e
 
 
-def auto_install_browsers():
+def auto_install_browsers(browsers:Optional[List[str]]=None):
     if need_to_install_browsers():
-        subprocess.check_call([sys.executable, '-m', 'playwright', 'install'])
+        cmd = [sys.executable, '-m', 'playwright', 'install']
+        if browsers:
+            cmd.extend(browsers)
+        subprocess.check_call(cmd)

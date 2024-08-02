@@ -1,4 +1,5 @@
 import asyncio
+import sys
 from playwright.async_api import async_playwright, StorageState
 from typing import NamedTuple
 import json
@@ -34,11 +35,20 @@ def gen_local_storage(
         ]
     )
 
-async def run_speedtest(config: fast_config_t = fast_config_t(), upload:bool = False, check_interval: float=1.0):
 
+class speedtest_config_t(NamedTuple):
+    fast_config: fast_config_t = fast_config_t()
+    upload:bool = False
+    check_interval: float=1.0
+    print: bool = True
+
+
+
+async def run_speedtest(config: speedtest_config_t = speedtest_config_t()):
+    results = []
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        context = await browser.new_context(storage_state=gen_local_storage(config))
+        context = await browser.new_context(storage_state=gen_local_storage(config.fast_config))
         page = await context.new_page()
         await page.goto("https://fast.com")
 
@@ -62,10 +72,12 @@ async def run_speedtest(config: fast_config_t = fast_config_t(), upload:bool = F
                     };
                 })();
                 ''')
-            print('Speed Test Results:', result)
-            if not upload and result["uploadSpeed"]:
+            if config.print:
+                print('Speed Test Results:', result, file=sys.stderr)
+            results.append(result)
+            if not config.upload and result["uploadSpeed"]:
                 break
             if result["isDone"]:
                 break
-            await asyncio.sleep(check_interval)
-        return result
+            await asyncio.sleep(config.check_interval)
+        return results
