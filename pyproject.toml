@@ -25,7 +25,7 @@ version_scheme="no-guess-dev"
 local_scheme="node-and-timestamp"
 
 [tool.ruff]
-fix = true
+fix = false
 lint.select = ["E", "F", "B", "U", "YTT", "C", "DTZ", "PYI", "PT", "I", "FURB", "RUF"]
 lint.ignore = ["E501"]
 lint.preview = true
