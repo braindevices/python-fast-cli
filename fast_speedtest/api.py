@@ -54,25 +54,27 @@ async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
         await page.goto("https://fast.com")
 
         while True:
-            result = await page.evaluate('''(function(){
-                    const $ = document.querySelector.bind(document);
+            result = await page.evaluate(
+                '''(function(){
+    const $ = document.querySelector.bind(document);
 
-                    return {
-                        downloadSpeed: Number($('#speed-value')?.textContent) || 0,
-                        uploadSpeed: Number($('#upload-value')?.textContent) || 0,
-                        downloadUnit: ($('#speed-units')?.textContent || '').trim(),
-                        downloaded: Number($('#down-mb-value')?.textContent?.trim()) || 0,
-                        uploadUnit: ($('#upload-units')?.textContent || '').trim(),
-                        uploaded: Number($('#up-mb-value')?.textContent?.trim()) || 0,
-                        latency: Number($('#latency-value')?.textContent?.trim()) || 0,
-                        bufferBloat: Number($('#bufferbloat-value')?.textContent?.trim()) || 0,
-                        userLocation: ($('#user-location')?.textContent || '').trim(),
-                        userIp: ($('#user-ip')?.textContent || '').trim(),
-                        serverLocation: ($('#server-locations')?.textContent || '').trim().split('\xa0\xa0|\xa0\xa0'),
-                        isDone: Boolean($('#speed-value.succeeded') && $('#upload-value.succeeded'))
-                    };
-                })();
-                ''')
+    return {
+        downloadSpeed: Number($('#speed-value')?.textContent) || 0,
+        uploadSpeed: Number($('#upload-value')?.textContent) || 0,
+        downloadUnit: ($('#speed-units')?.textContent || '').trim(),
+        downloaded: Number($('#down-mb-value')?.textContent?.trim()) || 0,
+        uploadUnit: ($('#upload-units')?.textContent || '').trim(),
+        uploaded: Number($('#up-mb-value')?.textContent?.trim()) || 0,
+        latency: Number($('#latency-value')?.textContent?.trim()) || 0,
+        bufferBloat: Number($('#bufferbloat-value')?.textContent?.trim()) || 0,
+        userLocation: ($('#user-location')?.textContent || '').trim(),
+        userIp: ($('#user-ip')?.textContent || '').trim(),
+        serverLocation: ($('#server-locations')?.textContent || '').trim().split('\xa0\xa0|\xa0\xa0'),
+        isDone: Boolean($('#speed-value.succeeded') && $('#upload-value.succeeded'))
+    };
+})();
+'''
+                )
             if config.print:
                 print('Speed Test Results:', result, file=sys.stderr)
             results.append(result)

@@ -43,8 +43,8 @@ def test_parser_no_args(monkeypatch: pytest.MonkeyPatch):
     # Call the main function which will trigger SystemExit
     config, auto_install_browsers, output_json,  = parse_arguments()
     assert config.fast_config == fast_config_t()
-    assert auto_install_browsers == True
-    assert output_json == False
+    assert auto_install_browsers
+    assert not output_json
 
 
 def test_parser_with_args(monkeypatch: pytest.MonkeyPatch):
@@ -53,8 +53,8 @@ def test_parser_with_args(monkeypatch: pytest.MonkeyPatch):
     
     # Call the main function which will trigger SystemExit
     config, auto_install_browsers, output_json,  = parse_arguments()
-    assert auto_install_browsers == True
-    assert output_json == False
+    assert auto_install_browsers
+    assert not output_json
     assert config.fast_config == fast_config_t(maxDuration=5)
 
 
@@ -78,7 +78,7 @@ def test_main(monkeypatch: pytest.MonkeyPatch):
     captured_output.seek(0)
     output = captured_output.getvalue()
     result = json.loads(output)[-1]
-    assert result["isDone"] == False
+    assert not result["isDone"]
     assert result["downloadSpeed"] > 0
     assert result["uploadSpeed"] > 0
     assert len(result["serverLocation"]) > 0
