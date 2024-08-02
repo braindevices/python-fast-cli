@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=72", "wheel", "setuptools_scm>=8.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-cli"
+dynamic = ["version"]
+description = "command line tool to use fast.com for speedtest"
+authors = [{ name = "Ling Wang", email = "lingwangneuraleng@gmail.com" }]
+license = { text = "MIT" }
+dependencies = [
+    "playwright>=1.45.1"
+]
+requires-python = ">=3.10"
+
+[project.scripts]
+fast-cli = "fast_speedtest.cli:main"
+
+[tool.setuptools_scm]
+write_to = "fast_speedtest/_version.py"
+version_scheme="no-guess-dev"
+local_scheme="node-and-timestamp"
+
+[tool.ruff]
+fix = true
+lint.select = ["E", "F", "B", "U", "YTT", "C", "DTZ", "PYI", "PT", "I", "FURB", "RUF"]
+lint.preview = true
+
+[tool.ruff.lint.isort]
+force-single-line = true
+from-first = false
+lines-between-types = 1
+order-by-type = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+log_level = "debug"
+log_cli_level = "info"
