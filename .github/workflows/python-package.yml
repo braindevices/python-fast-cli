@@ -9,9 +9,14 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  run_demo: false
+  run_pytest: false
+  run_ruff: false
+  run_type_check: false
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
     outputs:
       is_pypi_compatible: ${{ steps.check_pypi_compatbility.outputs.is_pypi_compatible }}
@@ -34,18 +39,21 @@ jobs:
     - name: Prepare venv and Install dependencies
       run: |
         python3 myprepare.py
-    # - name: check type
-    #   run: |
-    #     ./devenv_exec ./check_types.sh
-    # - name: Lint with Ruff
-    #   run: |
-    #     ./devenv_exec pip install ruff
-    #     ./devenv_exec ruff check --output-format=github fast_speedtest tests
-    # - name: Test with pytest
-    #   run: |
-    #     ./devenv_exec pytest
+    - name: check type
+      if: env.run_type_check == 'true'
+      run: |
+        ./devenv_exec ./check_types.sh
+    - name: Lint with Ruff
+      if: env.run_ruff == 'true'
+      run: |
+        ./devenv_exec pip install ruff
+        ./devenv_exec ruff check --output-format=github fast_speedtest tests
+    - name: Test with pytest
+      if: env.run_pytest == 'true'
+      run: |
+        ./devenv_exec pytest
     - name: Show example result
-      if: matrix.python-version == '3.11'
+      if: env.run_demo == 'true' && matrix.python-version == '3.11'
       run: ./devenv_exec python3 -m fast_speedtest.cli --min-duration 2 --max-duration 3 --max-connections 1 --no-upload --interval 1 --json
     - name: Build a binary wheel and a source tarball
       run: ./build.sh
