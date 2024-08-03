@@ -44,7 +44,8 @@ def parse_arguments():
         "--use-browser",
         dest="browser_name",
         type=str,
-        default="chromium"
+        default="chromium",
+        help="browser is used to access fast.com [default: %(default)s]"
     )
 
     parser.add_argument(
