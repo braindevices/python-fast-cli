@@ -69,6 +69,7 @@ def main():
         nodeenv=parsed_args.nodeenv
     )
     install_mypy(user=False)
+    install_tomli(user=False)
     install_dependencies()
     
 

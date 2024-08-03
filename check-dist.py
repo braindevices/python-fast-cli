@@ -4,9 +4,9 @@ from glob import glob
 import os
 
 try:
-    import tomli as toml
-except ImportError:
     import tomllib as toml
+except ImportError:
+    import tomli as toml
 
 def get_project_name()->str:
     pyproject_path = os.path.realpath("./pyproject.toml")
