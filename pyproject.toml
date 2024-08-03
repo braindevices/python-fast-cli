@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 packages = ["fast_speedtest"]
 
 [project]
-name = "fast-com-cli"
+name = "fastcom-speed-cli"
 dynamic = ["version"]
 description = "This package provides a command-line and Python interface for netflix's fast.com for speedtest"
 readme = "readme.md"
