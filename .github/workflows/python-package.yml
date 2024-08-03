@@ -16,6 +16,10 @@ env:
   run_type_check: false
 
 jobs:
+  job_global_vars:
+    runs-on: ubuntu-latest
+    outputs:
+      publish_to_pypi: true
   build:
     runs-on: ubuntu-latest
     outputs:
@@ -71,8 +75,9 @@ jobs:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
     needs:
     - build
+    - job_global_vars
     runs-on: ubuntu-latest
-    if: needs.build.outputs.is_pypi_compatible == 'true'
+    if: (needs.job_global_vars.outputs.publish_to_pypi != 'true') && needs.build.outputs.is_pypi_compatible == 'true'
     environment:
       name: testpypi
       url: https://test.pypi.org/p/fast-com-cli
@@ -91,3 +96,31 @@ jobs:
       with:
         repository-url: https://test.pypi.org/legacy/
         verbose: true
+
+  pypi-publish:
+    needs:
+      - build
+      - job_global_vars
+    runs-on: ubuntu-latest
+    if: (needs.job_global_vars.outputs.publish_to_pypi == 'true') && needs.build.outputs.is_pypi_compatible == 'true'
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
+    # Dedicated environments with protections for publishing are strongly recommended.
+    environment:
+      name: pypi
+      # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
+      # url: https://pypi.org/p/YOURPROJECT
+
+    steps:
+      - name: Retrieve release distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish release distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          verbose: true
