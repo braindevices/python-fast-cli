@@ -62,7 +62,7 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/fast-cli
+      url: https://test.pypi.org/p/fast-com-cli
 
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
