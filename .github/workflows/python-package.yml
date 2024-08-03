@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    outputs:
+      is_pypi_compatible: ${{ steps.check_pypi_compatbility.outputs.is_pypi_compatible }}
     strategy:
       fail-fast: false
       matrix:
@@ -47,6 +49,9 @@ jobs:
       run: ./devenv_exec python3 -m fast_speedtest.cli --min-duration 2 --max-duration 3 --max-connections 1 --no-upload --interval 1 --json
     - name: Build a binary wheel and a source tarball
       run: ./build.sh
+    - name: Check if the version is PyPi compatible
+      id: check_pypi_compatbility
+      run: ./devenv_exec ./check_dist.py
     - name: Store the distribution packages
       if: matrix.python-version == '3.11'
       uses: actions/upload-artifact@v4
@@ -59,7 +64,7 @@ jobs:
     needs:
     - build
     runs-on: ubuntu-latest
-
+    if: needs.build.outputs.is_pypi_compatible == 'true'
     environment:
       name: testpypi
       url: https://test.pypi.org/p/fast-com-cli
