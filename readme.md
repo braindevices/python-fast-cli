@@ -17,8 +17,12 @@ The playwright need to install browsers at the first time it is been used.
 
 ## Usage
 
+### command line
+- if it is installed via pip, then there is entry point at `~/.local/bin/fast-cli`
+- if used from the source repo, one can invoke it via `python3 -m fast_speedtest.cli`
+
 ```
-usage: cli.py [-h] [--min-duration MIN_DURATION] [--max-duration MAX_DURATION] [--measure-upload-latency MEASURE_UPLOAD_LATENCY]
+usage: fast-cli [-h] [--min-duration MIN_DURATION] [--max-duration MAX_DURATION] [--measure-upload-latency MEASURE_UPLOAD_LATENCY]
               [--min-connections MIN_CONNECTIONS] [--max-connections MAX_CONNECTIONS] [--should-persist SHOULD_PERSIST]
               [--show-advanced SHOW_ADVANCED] [--no-install-browser] [--no-upload] [--interval CHECK_INTERVAL] [--json]
 
@@ -50,6 +54,14 @@ If you get warning about `Host system is missing dependencies to run browsers.`,
 normally it won't cause any real problem,
 since the fast.com only use limited features.
 But if it really cause problem make sure you have installed [all the system dependencies](https://playwright.dev/docs/browsers#install-system-dependencies).
+
+### use as lib
+
+```
+import fast_speedtest.api
+...
+```
+
 
 ### example
 
