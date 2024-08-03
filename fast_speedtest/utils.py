@@ -26,4 +26,4 @@ def auto_install_browsers(browsers: Optional[List[str]] = None):
         cmd = [sys.executable, '-m', 'playwright', 'install']
         if browsers:
             cmd.extend(browsers)
-        subprocess.check_call(cmd)
+        subprocess.check_call(cmd, stdout=sys.stderr)
