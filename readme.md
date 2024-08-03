@@ -15,6 +15,18 @@ this is pure python package based on python version of [playwright](https://play
 
 The playwright need to install browsers at the first time it is been used.
 
+## installation
+
+```
+pip install -U fastcom-speed-cli
+```
+
+### from source
+
+- clone the repo
+- cd into the repo dir
+- `pip install .`
+
 ## Usage
 
 ### command line
