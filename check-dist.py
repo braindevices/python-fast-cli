@@ -1,9 +1,30 @@
-from typing import Dict
+from typing import Dict, Optional
 from packaging import version
 from glob import glob
 import os
 
-PROJECT_NAME = "fast_com_cli"
+try:
+    import tomli as toml
+except ImportError:
+    import tomllib as toml
+
+def get_project_name()->str:
+    pyproject_path = os.path.realpath("./pyproject.toml")
+    with open(pyproject_path, 'rb') as f:
+        pyproject_toml = toml.load(f)
+    
+    # Access the project name
+    maybe_name = pyproject_toml.get(
+        'project', {}).get(
+            'name', None
+        )
+    if not maybe_name:
+        raise RuntimeError(f"cannot get project name from {pyproject_path}")
+    return maybe_name
+
+
+
+PROJECT_NAME = get_project_name()
 dist_dir = os.path.realpath("./dist")
 
 
@@ -21,11 +42,12 @@ def write_to_github_output(data: Dict[str, str]):
 
 def main():
     is_pypi_compatible = False
-    gz_files = glob(f"{dist_dir}/{PROJECT_NAME}-*.tar.gz")
+    file_prefix = PROJECT_NAME.replace("-", "_")
+    gz_files = glob(f"{dist_dir}/{file_prefix}-*.tar.gz")
     if not gz_files:
         raise RuntimeError(f"there is no gz package file in {dist_dir}")
     for i in gz_files:
-        file_ver = os.path.basename(i).lstrip(PROJECT_NAME + "-").rstrip(".tar.gz")
+        file_ver = os.path.basename(i).lstrip(file_prefix + "-").rstrip(".tar.gz")
         if version.parse(file_ver).local:
             is_pypi_compatible = False
             break

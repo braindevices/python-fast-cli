@@ -155,6 +155,23 @@ def install_mypy(user: bool):
         run_command(cmd)
 
 
+def install_tomli(user: bool):
+    try:
+        import tomllib
+    except ModuleNotFoundError:
+        # before py311 we need tomli to parse toml
+        cmd = [
+            "./devenv_exec",
+            "pip",
+            "install",
+            "--upgrade",
+            "tomli"
+        ]
+        if user:
+            cmd.append("--user")
+        run_command(cmd) 
+
+
 def install_dependencies():
     cmd = [
         "./devenv_exec",
