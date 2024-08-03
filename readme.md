@@ -48,7 +48,12 @@ options:
                         data collection interval [default: 1.0]
 ```
 
-By default, when this command is run for the first time, it will attempt to install the browser using the Playwright command. If you are certain that the browser is already installed via Playwright, you can suppress this behavior by using the --no-install-browser flag.
+By default, when this command is run for the first time, 
+it will attempt to install the browser to `~/.cache/ms-playwright`
+using the playwright command.
+If you are certain that the browser is already installed via Playwright,
+you can suppress this behavior by using the --no-install-browser flag.
+To control the browser binary location [read this for detail](https://playwright.dev/docs/browsers#managing-browser-binaries).
 
 If you get warning about `Host system is missing dependencies to run browsers.`,
 normally it won't cause any real problem,
