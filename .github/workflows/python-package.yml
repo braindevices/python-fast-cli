@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       publish_to_pypi: true
+    steps:
+      - name: No ops
+        run: echo "No ops!"
+
   build:
     runs-on: ubuntu-latest
     outputs:
