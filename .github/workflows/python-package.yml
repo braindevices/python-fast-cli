@@ -51,7 +51,7 @@ jobs:
       run: ./build.sh
     - name: Check if the version is PyPi compatible
       id: check_pypi_compatbility
-      run: ./devenv_exec ./check_dist.py
+      run: ./devenv_exec ./check-dist.py
     - name: Store the distribution packages
       if: matrix.python-version == '3.11'
       uses: actions/upload-artifact@v4
