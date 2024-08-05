@@ -87,110 +87,187 @@ import fast_speedtest.api
 ```json
 [
  {
-  "downloadSpeed": 0,
+  "downloadSpeed": 350,
   "uploadSpeed": 0,
-  "downloadUnit": "",
-  "downloaded": 0,
+  "downloadUnit": "Kbps",
+  "downloaded": 0.02,
   "uploadUnit": "Mbps",
   "uploaded": 0,
   "latency": 0,
-  "bufferBloat": 0,
-  "userLocation": "",
-  "userIp": "",
-  "serverLocation": [
-   ""
-  ],
-  "isDone": false
- },
- {
-  "downloadSpeed": 1.5,
-  "uploadSpeed": 0,
-  "downloadUnit": "Mbps",
-  "downloaded": 0.12,
-  "uploadUnit": "Mbps",
-  "uploaded": 0,
-  "latency": 0,
-  "bufferBloat": 89,
+  "bufferBloat": 92,
   "userLocation": "Chicago, US",
-  "userIp": "172.183.91.174",
+  "userIp": "172.183.162.214",
   "serverLocation": [
    "Barranquilla, CO",
    "Cartagena de Indias, CO",
    "Bogot\u00e1, CO"
   ],
-  "isDone": false
+  "isDone": false,
+  "time": "2024-08-05T04:52:29.802055+00:00"
  },
  {
-  "downloadSpeed": 170,
+  "downloadSpeed": 94,
   "uploadSpeed": 0,
   "downloadUnit": "Mbps",
-  "downloaded": 20,
+  "downloaded": 8.7,
   "uploadUnit": "Mbps",
   "uploaded": 0,
   "latency": 0,
-  "bufferBloat": 89,
+  "bufferBloat": 92,
   "userLocation": "Chicago, US",
-  "userIp": "172.183.91.174",
+  "userIp": "172.183.162.214",
   "serverLocation": [
    "Barranquilla, CO",
    "Cartagena de Indias, CO",
    "Bogot\u00e1, CO"
   ],
-  "isDone": false
+  "isDone": false,
+  "time": "2024-08-05T04:52:30.829972+00:00"
  },
  {
-  "downloadSpeed": 280,
+  "downloadSpeed": 270,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 40,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 0,
+  "bufferBloat": 92,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.162.214",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false,
+  "time": "2024-08-05T04:52:31.838278+00:00"
+ },
+ {
+  "downloadSpeed": 270,
   "uploadSpeed": 0,
   "downloadUnit": "Mbps",
   "downloaded": 50,
   "uploadUnit": "Mbps",
   "uploaded": 0,
-  "latency": 0,
-  "bufferBloat": 89,
+  "latency": 90,
+  "bufferBloat": 92,
   "userLocation": "Chicago, US",
-  "userIp": "172.183.91.174",
+  "userIp": "172.183.162.214",
   "serverLocation": [
    "Barranquilla, CO",
    "Cartagena de Indias, CO",
    "Bogot\u00e1, CO"
   ],
-  "isDone": false
+  "isDone": false,
+  "time": "2024-08-05T04:52:32.847574+00:00"
  },
  {
-  "downloadSpeed": 280,
+  "downloadSpeed": 270,
   "uploadSpeed": 0,
   "downloadUnit": "Mbps",
-  "downloaded": 60,
+  "downloaded": 50,
   "uploadUnit": "Mbps",
   "uploaded": 0,
-  "latency": 85,
-  "bufferBloat": 89,
+  "latency": 90,
+  "bufferBloat": 92,
   "userLocation": "Chicago, US",
-  "userIp": "172.183.91.174",
+  "userIp": "172.183.162.214",
   "serverLocation": [
    "Barranquilla, CO",
    "Cartagena de Indias, CO",
    "Bogot\u00e1, CO"
   ],
-  "isDone": false
+  "isDone": false,
+  "time": "2024-08-05T04:52:33.855684+00:00"
  },
  {
-  "downloadSpeed": 280,
-  "uploadSpeed": 38,
+  "downloadSpeed": 270,
+  "uploadSpeed": 0,
   "downloadUnit": "Mbps",
-  "downloaded": 60,
-  "uploadUnit": "Kbps",
+  "downloaded": 50,
+  "uploadUnit": "Mbps",
   "uploaded": 0,
-  "latency": 85,
-  "bufferBloat": 89,
+  "latency": 90,
+  "bufferBloat": 92,
   "userLocation": "Chicago, US",
-  "userIp": "172.183.91.174",
+  "userIp": "172.183.162.214",
   "serverLocation": [
    "Barranquilla, CO",
    "Cartagena de Indias, CO",
    "Bogot\u00e1, CO"
   ],
-  "isDone": false
+  "isDone": false,
+  "time": "2024-08-05T04:52:34.863142+00:00"
+ },
+ {
+  "downloadSpeed": 270,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 50,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 90,
+  "bufferBloat": 92,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.162.214",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false,
+  "time": "2024-08-05T04:52:35.870352+00:00"
+ },
+ {
+  "downloadSpeed": 270,
+  "uploadSpeed": 0,
+  "downloadUnit": "Mbps",
+  "downloaded": 50,
+  "uploadUnit": "Mbps",
+  "uploaded": 0,
+  "latency": 90,
+  "bufferBloat": 92,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.162.214",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false,
+  "time": "2024-08-05T04:52:36.878271+00:00"
+ },
+ {
+  "downloadSpeed": 270,
+  "uploadSpeed": 40,
+  "downloadUnit": "Mbps",
+  "downloaded": 50,
+  "uploadUnit": "Kbps",
+  "uploaded": 0,
+  "latency": 90,
+  "bufferBloat": 92,
+  "userLocation": "Chicago, US",
+  "userIp": "172.183.162.214",
+  "serverLocation": [
+   "Barranquilla, CO",
+   "Cartagena de Indias, CO",
+   "Bogot\u00e1, CO"
+  ],
+  "isDone": false,
+  "time": "2024-08-05T04:52:37.885847+00:00"
  }
+]
+```
+
+It is possible that the firewall block the fast.com upload/download
+then there will be an error, the json output looks like this:
+```
+[
+  {
+  "error": "* Could not reach our servers to perform the test. You may not be connected to the internet",
+  "time": "2024-08-05T06:46:26.457695+02:00"
+ }
+
 ]
 ```
