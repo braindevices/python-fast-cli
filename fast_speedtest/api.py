@@ -2,6 +2,7 @@ import asyncio
 import json
 import sys
 
+from datetime import datetime
 from typing import NamedTuple
 
 from playwright.async_api import StorageState
@@ -53,21 +54,26 @@ DEFAULT_SPEEDTEST_CONF = speedtest_config_t()
 
 
 async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
+    n_rounds = int(max(config.fast_config.maxDuration * 2, 30) // config.check_interval) + 1
+    # the page won't end the test according to max duration exactly
+    # it usually take much longer, for duration < 10, for example 5, it usually take around 20 seconds.
+    # so we set a minium 30 seconds loop here, it can ends earlier.
     results = []
     async with async_playwright() as p:
         browser = await getattr(p, config.browser_name).launch(headless=True)
         context = await browser.new_context(storage_state=gen_local_storage(config.fast_config))
         page = await context.new_page()
         await page.goto("https://fast.com")
-        while True:
+        for _i in range(n_rounds):
             await asyncio.sleep(config.check_interval)
+            now = datetime.now().astimezone().isoformat()
             error = None
             error_elem = page.locator('#error-results-msg')
             if await error_elem.is_visible():
                 error_text = await error_elem.text_content()
                 error = error_text.strip() if error_text else None
                 print(error, file=sys.stderr)
-                results.append({"error": error})
+                results.append({"error": error, "time": now})
                 break
             # error: ($('#error-results-msg')?.textContent || '').trim(),
             result = await page.evaluate(
@@ -91,8 +97,10 @@ async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
 })();
 '''
                 )
+            result["time"] = now
             if config.print:
                 print('Speed Test Results:', result, file=sys.stderr)
+            
             results.append(result)
             if not config.upload and result["uploadSpeed"]:
                 break
