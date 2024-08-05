@@ -59,8 +59,17 @@ async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
         context = await browser.new_context(storage_state=gen_local_storage(config.fast_config))
         page = await context.new_page()
         await page.goto("https://fast.com")
-
         while True:
+            await asyncio.sleep(config.check_interval)
+            error = None
+            error_elem = page.locator('#error-results-msg')
+            if await error_elem.is_visible():
+                error_text = await error_elem.text_content()
+                error = error_text.strip() if error_text else None
+                print(error, file=sys.stderr)
+                results.append({"error": error})
+                break
+            # error: ($('#error-results-msg')?.textContent || '').trim(),
             result = await page.evaluate(
                 '''(function(){
     const $ = document.querySelector.bind(document);
@@ -89,7 +98,7 @@ async def run_speedtest(config: speedtest_config_t = DEFAULT_SPEEDTEST_CONF):
                 break
             if result["isDone"]:
                 break
-            await asyncio.sleep(config.check_interval)
+            
         await context.close()
         await browser.close()    
     return results
