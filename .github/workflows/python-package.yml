@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 env:
-  run_demo: false
+  run_demo: true
   run_pytest: false
   run_ruff: false
   run_type_check: false
